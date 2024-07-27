@@ -17,7 +17,7 @@ const VariantSwatches = ({ variants } : VariantSwatchesProps) => {
           key={variant.id}
           onClick={() => setSelectedVariant(variant)}
           className={`w-8 h-8 ${
-            selectedVariant.id === variant.id ? 'border-2 border-blacky' : ''
+            selectedVariant.id === variant.id ? 'border-2 border-black' : ''
           }`}
         >
           <img
