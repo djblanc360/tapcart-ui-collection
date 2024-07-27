@@ -1,5 +1,9 @@
 "use client";
 import React, { useRef, useState } from "react";
+import {
+  Badge,
+} from "@tapcart/mobile-components"
+
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -24,6 +28,7 @@ const ImageCarousel = ({ images }: ImageCarouselProps) => {
 
   return (
     <div>
+      
     <Swiper
       pagination={{ 
         clickable: true,
@@ -34,11 +39,16 @@ const ImageCarousel = ({ images }: ImageCarouselProps) => {
     >
       {images.map((image) => (
         <SwiperSlide key={image.id}>
+          <div className="absolute top-0 left-4 z-10">
+          <Badge variant="sale" size="carousels" className="text-lg mt-[8px]">{image.altText}</Badge>
+          </div>
           <img
             className="w-full h-full object-cover"
             alt={image.altText}
             src={resizeImg(image.src, 400)}
           />
+          
+
         </SwiperSlide>
       ))}
     </Swiper>

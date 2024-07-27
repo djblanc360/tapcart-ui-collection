@@ -37,13 +37,6 @@ const  ProductCard = ({ product, className }: ProductCardProps) => {
           onVariantChange={handleVariantChange}
         />
 
-      <Button
-        variant="quickadd"
-        size="sm"
-      >
-        + Quick add
-      </Button>
-
       <Text className="text-xs mt-[8px]">{product.title}</Text>
       <Text className="text-xs text-gray-500">{variantColor}</Text>
 
@@ -63,6 +56,16 @@ const  ProductCard = ({ product, className }: ProductCardProps) => {
         </Text>
 
       </div>
+
+<div>
+        
+</div>
+      <Button
+        variant="quickadd"
+        size="sm"
+      >
+        + Quick add
+      </Button>
 
     </div>
   )
