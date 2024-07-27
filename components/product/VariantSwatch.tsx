@@ -4,10 +4,11 @@ import { Variant } from '@/types/product'
 
 interface VariantSwatchesProps {
   variants: Variant[]
+  selectedVariant: Variant
+  onVariantChange: (variant: Variant) => void;
 }
 
-const VariantSwatches = ({ variants } : VariantSwatchesProps) => {
-  const [selectedVariant, setSelectedVariant] = useState(variants[0])
+const VariantSwatches = ({ variants, selectedVariant, onVariantChange }: VariantSwatchesProps) => {
 
   
   return (
@@ -15,7 +16,7 @@ const VariantSwatches = ({ variants } : VariantSwatchesProps) => {
       {variants.map((variant) => (
         <button
           key={variant.id}
-          onClick={() => setSelectedVariant(variant)}
+          onClick={() => onVariantChange(variant)}
           className={`w-8 h-8 ${
             selectedVariant.id === variant.id ? 'border-2 border-black' : ''
           }`}

@@ -1,5 +1,5 @@
 "use client"
-import * as React from "react"
+import React, { useState } from 'react'
 import {
   Button,
   Text,
@@ -8,22 +8,34 @@ import {
 } from "@tapcart/mobile-components"
 import ImageCarousel from "../ImageCarousel"
 import VariantSwatches from "./VariantSwatch"
+import { Product, Variant } from "../../types/product";
 
 interface ProductCardProps {
-    product: any
+    product: Product
     className?: string
 }
 
-export default function ProductCard(props : ProductCardProps) {
-  let variant = props.product.variants[0]
-  // console.log('variant', variant)
+const  ProductCard = ({ product, className }: ProductCardProps) => {
+  const [selectedVariant, setSelectedVariant] = React.useState(product.variants[0]);
+
+  const handleVariantChange = (variant: Variant) => {
+    setSelectedVariant(variant);
+    console.log(`selected variant: ${variant.id}`);
+  };
+
+  const variantColor = selectedVariant.selectedOptions.find((option) => option.name === "Color")?.value;
+  const variantImages = product.images.filter(image => image.altText === variantColor);
 
   return (
-    <div className={` ${props.className}`}>
+    <div className={` ${className}`}>
 
-        <ImageCarousel images={props.product.images} />
+        <ImageCarousel images={variantImages.length > 0 ? variantImages : product.images} />
 
-        <VariantSwatches variants={props.product.variants} />
+        <VariantSwatches 
+          variants={product.variants} 
+          selectedVariant={selectedVariant}
+          onVariantChange={handleVariantChange}
+        />
 
       <Button
         variant="quickadd"
@@ -32,13 +44,14 @@ export default function ProductCard(props : ProductCardProps) {
         + Quick add
       </Button>
 
-      <Text className="text-xs mt-[8px]">{props.product.title}</Text>
+      <Text className="text-xs mt-[8px]">{product.title}</Text>
+      <Text className="text-xs text-gray-500">{variantColor}</Text>
 
       <div className="flex mt-[4px]">
-        {variant.compare_at_price ? (
+        {selectedVariant.compare_at_price ? (
           <Text className="text-sm mr-[8px] line-through text-red-500">
             <Money
-              price={variant.compare_at_price}
+              price={Number(selectedVariant.compare_at_price)}
               currency={"USD"}
               locale={"en-us"}
             />
@@ -46,7 +59,7 @@ export default function ProductCard(props : ProductCardProps) {
         ) : null}
 
         <Text className="text-sm">
-          <Money price={variant.price} currency={"USD"} locale={"en-us"} />
+          <Money price={Number(selectedVariant.price)} currency={"USD"} locale={"en-us"} />
         </Text>
 
       </div>
@@ -54,3 +67,6 @@ export default function ProductCard(props : ProductCardProps) {
     </div>
   )
 }
+
+
+export default ProductCard
