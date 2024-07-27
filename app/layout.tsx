@@ -11,7 +11,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={cn("min-h-screen bg-background font-sans antialiased")}>
-        <div className="relative flex min-h-screen flex-col max-w-[420px] w-full m-auto">
+        <div className="relative flex min-h-screen flex-col max-w-content w-full m-auto px-4">
           <div className="flex-1">{children}</div>
         </div>
       </body>

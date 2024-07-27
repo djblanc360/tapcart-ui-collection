@@ -11,11 +11,11 @@ const ProductsGrid = () => {
   return (
     <div className="flex flex-col mt-10">
 
-      <Grid columns={2}>
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
       {Products.map((product, index) => (
         <ProductCard key={index} product={product} className="bg-red-300" />
       ))}
-      </Grid>
+    </div>
 
     </div>
   )
