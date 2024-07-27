@@ -12,8 +12,14 @@ import {
   type CarouselApi,
 } from "@tapcart/mobile-components"
 
-export default function ProductCard(props) {
+interface ProductCardProps {
+    product: any
+    className?: string
+}
+
+export default function ProductCard(props : ProductCardProps) {
   let variant = props.product.variants[0]
+  console.log('variant', variant)
   const [api, setApi] = React.useState<CarouselApi>()
   const [current, setCurrent] = React.useState(0)
   const [count, setCount] = React.useState(0)

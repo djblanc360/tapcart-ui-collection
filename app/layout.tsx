@@ -1,7 +1,7 @@
 "use client"
 import "./globals.css"
 import { cn } from "@tapcart/mobile-components"
-import "@tapcart/mobile-components/dist/globals.css"
+// import "@tapcart/mobile-components/dist/globals.css"
 
 interface RootLayoutProps {
   children: React.ReactNode
