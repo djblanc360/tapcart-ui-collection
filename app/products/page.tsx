@@ -2,8 +2,13 @@
 import ProductCard from "@components/product/ProductCard";
 import useData from '@/hooks/useData';
 import React, { useState } from "react";
+// import { loadMoreProducts } from '@/utils/loadMoreProducts';
+import {
+  Grid,
+  ProductGrid
+} from "@tapcart/mobile-components"
+
 import InfiniteScroll from 'react-infinite-scroller';
-import { Grid } from "@tapcart/mobile-components";
 
 const ProductsGrid = () => {
   const { products } = useData();
@@ -26,6 +31,14 @@ const ProductsGrid = () => {
 
   return (
     <div className="flex flex-col mt-10">
+      {/* <ProductGrid
+        loadMoreProducts={loadMoreProducts}
+        initialData={initialData}
+        queryVariables={{}}
+        config={{}}
+      /> */}
+
+
       <InfiniteScroll
         pageStart={0}
         loadMore={handleLoadMore}
@@ -40,8 +53,8 @@ const ProductsGrid = () => {
         <div
           className={`loader mt-4 transition-all duration-500 ease-in-out
             bg-neutral-300 h-40 text-lg text-center font-bold flex items-center justify-center text-black
-            ${ loading ? 'opacity-100' : 'opacity-70'}`
-          }
+            ${ loading ? 'opacity-100' : 'opacity-70'}`}
+          
         >
           Loading Products...
         </div>
