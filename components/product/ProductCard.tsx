@@ -30,11 +30,11 @@ const  ProductCard = ({ product, className }: ProductCardProps) => {
   const variantAvailable = selectedVariant.availableForSale;
 
   return (
-    <div className={` ${className} `}>
+    <div className={` ${className} flex flex-col h-full`}>
 
         <ImageCarousel images={variantImages.length > 0 ? variantImages : product.images} />
 
-      <div className="flex flex-col px-8">
+      <div className="flex flex-col px-8 flex-grow">
 
         <VariantSwatches 
           variants={product.variants} 
@@ -42,13 +42,13 @@ const  ProductCard = ({ product, className }: ProductCardProps) => {
           onVariantChange={handleVariantChange}
         />
 
-      <div className="flex w-full justify-between">
+      <div className="flex w-full justify-between py-4">
         <div>
           <Text className="text-xs mt-[8px]">{product.title}</Text>
           <Text className="text-xs text-gray-500">{variantColor}</Text>
         </div>
         <div className='flex flex-col'>
-          <div className="flex mt-[4px]">
+          <div className="flex flex-col-reverse md:flex-row mt-[4px]">
             {selectedVariant.compare_at_price ? (
               <Text className="text-sm mr-[8px] line-through text-red-500">
                 <Money
