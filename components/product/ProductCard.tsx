@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from 'react'
+import React, { useState } from "react";
 import {
   Button,
   Text,
@@ -17,7 +17,7 @@ interface ProductCardProps {
 }
 
 const  ProductCard = ({ product, className }: ProductCardProps) => {
-  const [selectedVariant, setSelectedVariant] = React.useState(product.variants[0]);
+  const [selectedVariant, setSelectedVariant] = useState(product.variants[0]);
 
   const handleVariantChange = (variant: Variant) => {
     setSelectedVariant(variant);

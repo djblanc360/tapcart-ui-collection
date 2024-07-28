@@ -2,12 +2,19 @@ import { useState, useEffect } from "react";
 import Products from "@data/sample-products";
 import { Product } from "@/types/product";
 
-const useData = () => {
-    const [products, setProducts] = useState<Product[]>([]);
+// interface PageData {
+//   products: Product[];
+//   cursorBlob?: string;
+// }
 
-    const interfaceProducts = Products.map((product) => {
+const useData = () => {
+// const interfaceProducts: Product[] = Products.slice(0, 8).map((product) => ({
+    // const [products, setProducts] = useState<Product[]>([]);
+
+    const products = Products.map((product) => {
         return {
             id: product.id,
+            handle: product.handle,
             title: product.title,
             description: product.description,
             productType: product.productType,
@@ -19,11 +26,22 @@ const useData = () => {
             })),
         };
     });
+    // useEffect(() => setProducts(interfaceProducts), []);
+    
 
+  return { products };
 
-    useEffect(() => setProducts(interfaceProducts), []);
+  /*
+  const pageData: PageData = {
+    products: interfaceProducts,
+    cursorBlob: products.length > 8 ? "8" : undefined,
+  };
 
-    return { products };
+  const [initialData, setInitialData] = useState<PageData[]>([pageData]);
+  console.log("i", initialData[0].products[0]);
+  return { initialData };
+  */
+
 };
 
 export default useData;
