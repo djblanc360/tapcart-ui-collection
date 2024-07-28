@@ -33,14 +33,14 @@ const  ProductCard = ({ product, className }: ProductCardProps) => {
     <div className={` ${className} flex flex-col h-full`}>
 
         <ImageCarousel images={variantImages.length > 0 ? variantImages : product.images} />
-
-      <div className="flex flex-col px-8 flex-grow">
-
         <VariantSwatches 
           variants={product.variants} 
           selectedVariant={selectedVariant}
           onVariantChange={handleVariantChange}
         />
+      <div className="flex flex-col px-8 flex-grow">
+
+
 
       <div className="flex w-full justify-between py-4">
         <div>
