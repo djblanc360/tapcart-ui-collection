@@ -18,8 +18,7 @@ interface ImageCarouselProps {
   images: any[];
 }
 
-const ImageCarousel = ({ images }: ImageCarouselProps) => {
-
+const ImageCarousel = ({  images }: ImageCarouselProps) => {
   const resizeImg = (src, width) => {
     let resized = src.match(/[^.]+|./g);
     resized.splice(5, 0, `_${width}x610`);

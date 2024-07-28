@@ -2,6 +2,7 @@ export interface Product {
     id: string;
     title: string;
     description: string;
+    productType: string;
     images: Image[];
     variants: Variant[];
 }
@@ -13,6 +14,8 @@ export interface Variant {
     compare_at_price: string;
     image: Image;
     selectedOptions: SelectedOption[];
+    availableForSale: boolean;
+    displayName: string;
 }
 
 export interface Image {

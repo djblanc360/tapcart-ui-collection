@@ -20,6 +20,7 @@ const VariantSwatches = ({ variants, selectedVariant, onVariantChange }: Variant
           className={`w-8 h-8 ${
             selectedVariant.id === variant.id ? 'border-2 border-black' : ''
           }`}
+          disabled={!variant.availableForSale}
         >
           <img
             className="w-full h-full object-cover"

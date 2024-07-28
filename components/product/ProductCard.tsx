@@ -8,6 +8,7 @@ import {
 } from "@tapcart/mobile-components"
 import ImageCarousel from "../ImageCarousel"
 import VariantSwatches from "./VariantSwatch"
+import QuickAdd from './QuickAdd'
 import { Product, Variant } from "../../types/product";
 
 interface ProductCardProps {
@@ -23,13 +24,17 @@ const  ProductCard = ({ product, className }: ProductCardProps) => {
     console.log(`selected variant: ${variant.id}`);
   };
 
+
   const variantColor = selectedVariant.selectedOptions.find((option) => option.name === "Color")?.value;
   const variantImages = product.images.filter(image => image.altText === variantColor);
+  const variantAvailable = selectedVariant.availableForSale;
 
   return (
-    <div className={` ${className}`}>
+    <div className={` ${className} `}>
 
         <ImageCarousel images={variantImages.length > 0 ? variantImages : product.images} />
+
+      <div className="flex flex-col px-8">
 
         <VariantSwatches 
           variants={product.variants} 
@@ -37,35 +42,45 @@ const  ProductCard = ({ product, className }: ProductCardProps) => {
           onVariantChange={handleVariantChange}
         />
 
-      <Text className="text-xs mt-[8px]">{product.title}</Text>
-      <Text className="text-xs text-gray-500">{variantColor}</Text>
+      <div className="flex w-full justify-between">
+        <div>
+          <Text className="text-xs mt-[8px]">{product.title}</Text>
+          <Text className="text-xs text-gray-500">{variantColor}</Text>
+        </div>
+        <div className='flex flex-col'>
+          <div className="flex mt-[4px]">
+            {selectedVariant.compare_at_price ? (
+              <Text className="text-sm mr-[8px] line-through text-red-500">
+                <Money
+                  price={Number(selectedVariant.compare_at_price)}
+                  currency={"USD"}
+                  locale={"en-us"}
+                />
+              </Text>
+            ) : null}
 
-      <div className="flex mt-[4px]">
-        {selectedVariant.compare_at_price ? (
-          <Text className="text-sm mr-[8px] line-through text-red-500">
-            <Money
-              price={Number(selectedVariant.compare_at_price)}
-              currency={"USD"}
-              locale={"en-us"}
-            />
-          </Text>
-        ) : null}
-
-        <Text className="text-sm">
-          <Money price={Number(selectedVariant.price)} currency={"USD"} locale={"en-us"} />
-        </Text>
-
+            <Text className="text-sm">
+              <Money price={Number(selectedVariant.price)} currency={"USD"} locale={"en-us"} />
+            </Text>
+          </div>
+          {!variantAvailable && (
+            <Badge variant="soldout" size="plp-layout" className="">
+              Sold Out
+            </Badge>
+          )}
+        </div>
+        
+      </div>
       </div>
 
-<div>
-        
-</div>
-      <Button
-        variant="quickadd"
-        size="sm"
-      >
-        + Quick add
-      </Button>
+          <div>
+            <QuickAdd 
+              selectedVariant={selectedVariant}
+              available={variantAvailable}
+             />
+          </div>
+      
+
 
     </div>
   )

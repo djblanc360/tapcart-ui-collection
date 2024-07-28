@@ -10,6 +10,7 @@ const useData = () => {
             id: product.id,
             title: product.title,
             description: product.description,
+            productType: product.productType,
             images: product.images,
             options: product.options,
             variants: product.variants.map((variant) => ({
