@@ -13,7 +13,6 @@ import InfiniteScroll from 'react-infinite-scroller';
 const ProductsGrid = () => {
   // const { initialData } = useData();
   const { products } = useData();
-  console.log('total products', products.length);
   const [visible, setVisible] = useState(products.slice(0, 4));
   const [hasMore, setHasMore] = useState(products.length > 4);
   const [loading, setLoading] = useState(false); // artificial loading state
@@ -21,17 +20,13 @@ const ProductsGrid = () => {
   const handleLoadMore = () => {
     setLoading(true);
     const moreProducts = products.slice(visible.length, visible.length + 4);
-    console.log('moreProducts', moreProducts);
-    console.log('visible', visible);
     setTimeout(() => {
       setLoading(false);
       setVisible([...visible, ...moreProducts]);
       
-      console.log('more visible', visible);
       if (visible.length + moreProducts.length >= products.length) {
         setHasMore(false);
       }
-      console.log('hasMore', hasMore);
     }, 1500);
   };
 

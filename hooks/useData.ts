@@ -38,7 +38,6 @@ const useData = () => {
   };
 
   const [initialData, setInitialData] = useState<PageData[]>([pageData]);
-  console.log("i", initialData[0].products[0]);
   return { initialData };
   */
 

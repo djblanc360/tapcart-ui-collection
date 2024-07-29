@@ -25,7 +25,6 @@ const ImageCarousel = ({  images }: ImageCarouselProps) => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   const handleHover = (index: number | null) => {
-    console.log('hovered index', index);
     setHoveredIndex(index);
   };
 

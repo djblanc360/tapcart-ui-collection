@@ -21,7 +21,6 @@ const  ProductCard = ({ product, className }: ProductCardProps) => {
 
   const handleVariantChange = (variant: Variant) => {
     setSelectedVariant(variant);
-    console.log(`selected variant: ${variant.id}`);
   };
 
 
