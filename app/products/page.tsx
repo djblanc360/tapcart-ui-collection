@@ -11,17 +11,23 @@ import {
 import InfiniteScroll from 'react-infinite-scroller';
 
 const ProductsGrid = () => {
+  // const { initialData } = useData();
   const { products } = useData();
-  console.log('ttoal products', products.length);
+  console.log('total products', products.length);
   const [visible, setVisible] = useState(products.slice(0, 4));
   const [hasMore, setHasMore] = useState(products.length > 4);
   const [loading, setLoading] = useState(false); // artificial loading state
 
   const handleLoadMore = () => {
+    setLoading(true);
     const moreProducts = products.slice(visible.length, visible.length + 4);
+    console.log('moreProducts', moreProducts);
+    console.log('visible', visible);
     setTimeout(() => {
-      setVisible([...visible, ...moreProducts]);
       setLoading(false);
+      setVisible([...visible, ...moreProducts]);
+      
+      console.log('more visible', visible);
       if (visible.length + moreProducts.length >= products.length) {
         setHasMore(false);
       }
@@ -46,9 +52,7 @@ const ProductsGrid = () => {
       >
         <Grid columns={2} className={undefined}>
           {visible.map((product, index) => (
-            <ProductCard key={index} product={product} className={loading &&
-              index === visible.length - 1 ? 'loading-product' : ''
-            } />
+            <ProductCard key={index} product={product}/>
           ))}
         <div
           className={`loader mt-4 transition-all duration-500 ease-in-out

@@ -1,7 +1,8 @@
 "use client";
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import {
   Badge,
+  AspectRatio,
 } from "@tapcart/mobile-components"
 
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -12,6 +13,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Navigation, Pagination } from "swiper/modules";
 import "./styles.css";
+import { Image } from "@/types/product";
 
 
 interface ImageCarouselProps {
@@ -20,8 +22,19 @@ interface ImageCarouselProps {
 
 const ImageCarousel = ({  images }: ImageCarouselProps) => {
   const [loaded, setLoaded] = React.useState(false);
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
-  React.useEffect(() => {
+  const handleHover = (index: number | null) => {
+    console.log('hovered index', index);
+    setHoveredIndex(index);
+  };
+
+  const getNextImage = (index: number): string => {
+    const nextImage = images[index + 1] || images[index];
+    return resizeImg(nextImage.src, 400);
+  };
+
+  useEffect(() => {
     setLoaded(false);
     const timer = setTimeout(() => setLoaded(true), 200);
     return () => clearTimeout(timer);
@@ -44,8 +57,12 @@ const ImageCarousel = ({  images }: ImageCarouselProps) => {
       modules={[Navigation, Pagination]}
       className="w-full rounded-t-lg overflow-hidden"
     >
-      {images.map((image) => (
-        <SwiperSlide key={image.id}>
+      {images.map((image, index) => (
+        <SwiperSlide 
+          key={image.id}
+          onMouseEnter={() => handleHover(index)}
+          onMouseLeave={() => handleHover(null)}
+        >
                     <div style={{ position: 'relative', width: '100%', paddingBottom: '150%' }}>
             <div
               className={`absolute top-0 right-0 bottom-0 left-0 transition-opacity duration-500 ${
@@ -55,11 +72,13 @@ const ImageCarousel = ({  images }: ImageCarouselProps) => {
           <div className="absolute top-0 left-4 z-10">
           <Badge variant="sale" size="carousels" className="text-lg mt-[8px]">{image.altText}</Badge>
           </div>
-          <img
-            className="w-full h-full object-cover"
-            alt={image.altText}
-            src={resizeImg(image.src, 400)}
-          />
+          <AspectRatio ratio={2 / 3}>
+                  <img
+                      className="w-full h-full object-cover cursor-pointer"
+                      src={hoveredIndex === index ? getNextImage(index) : resizeImg(image.src, 400)}
+                      alt={image.altText}
+                  />
+                </AspectRatio>
             </div>
           </div>
 
