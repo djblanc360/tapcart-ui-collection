@@ -10,6 +10,17 @@ import {
 
 import InfiniteScroll from 'react-infinite-scroller';
 
+
+const createScroller = (arr, itemsPerScroll) => {
+  let index = 0;
+  return () => {
+    if (index >= arr.length) return []; // no more items
+    const result = arr.slice(index, index + itemsPerScroll);
+    index += itemsPerScroll;
+    return result;
+  };
+};
+
 const ProductsGrid = () => {
   // const { initialData } = useData();
   const { products } = useData();
