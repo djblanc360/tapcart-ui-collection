@@ -1,77 +1,49 @@
-App Studio code challenge: 
+NextJS Application utilizing Tapcart UI: 
+(daryl you removed this from local)
 ---------------------------
 
 Product cards with variants
 ---------------------------
 
-### Challenge Overview
+### overview
 
-You are required to create a grid of product cards (supplied in the project).
+the `components/product/` directory contains reusable react components specifically designed to handle various aspects of product presentation and interaction.
 
-You will build variant color swatches that, when selected, update the carousel with the appropriate variant images. You will also implement a Quick Add button to show the selected variant ID using an alert().
+### components
 
-### Task 1: Initial Setup
+#### `QuickAdd.tsx`
 
-1.  Get the project to run:
+**description:** This component provides a quick add-to-cart functionality. users can quickly add a product variant to their cart with a single click.
 
--   Clone the project repository.
+**features:**
+- handles user interactions to quickly add items to the cart.
+- displays dynamic button text based on availability and click state.
+- includes visual feedback for user actions such as changing button color and text on click.
+- displays an alert showing the c correct selected variant ID, along with the displayName for easy reference and testinf
 
--   Install the necessary dependencies.
+#### `ProductCard.tsx`
 
--   Ensure that the project runs successfully on your local machine.
+**description:** This component represents an individual product card within a product grid. it provides a summary of the product's key information and serves as the parent component for specific user interactions in other components in this directory.
 
-3.  Component Iteration:
+**features:**
+- integrates with `ImageCarousel` from the base components of this project to displays product images and <Badge> at the top left indicating the color option
+- integrates with `ImageCarousel` to handle hover actions to show additional product images or information
+- titles, prices, and other essential details
+- integrates with `VariantSwatch`, serving as the local state for theselected variant.
+- integrates with `QuickAdd` for add to cart functionality
+- responsive design for various screen sizes
 
--   Iterate through the product data supplied and display the productCard component.
+#### `VariantSwatch.tsx`
 
--   Extract the necessary data to create the variant swatches.
+**description:** This component allows users to select different product variants (only color options) from a product card.
 
-### Task 2: Product Card Component
+**features:**
+- displays available variants
+- show variant options for the color option only
+- updates the selected variant state and communicates it to parent component
+- visual indicators for selected and available variants
+- variants are rendered in a dynamic carousel that adjust for screen size and number of variants
 
-1.  Variant Color Swatches:
+### usage
 
--   Navigate to the product card component.
-
--   Build variant swatches using the variant image values.
-
--   Show variant options for the color option only
-
-1.  Image Carousel Update:
-
--   Implement functionality to update the image carousel based on the selected color variant
-
--   Ensure that selecting a variant logs the correct variant ID to the console.
-
--   Update the image carousel to display images corresponding to the selected variant ID.
-
-3.  Quick Add Button:
-
--   Implement the Quick Add button functionality.
-
--   Display an alert showing the correct selected variant ID when the button is clicked.
-
-### Submission Process
-
-1.  Branching and Commit History:
-
--   Create a new branch from the main branch
-
--   Ensure a clear and descriptive commit history, demonstrating good git-flow practices.
-
-3.  Pull Request:
-
--   Submit a pull request (PR) when the project is complete explaining your work and how to test it
-
-### Bonus Points
-
--   Implement animations to enhance the user experience (UX).
-
--   Add infinite scroll functionality for paginating through products in the grid
-
-Notes on sample data:
-
-The product JSON you will use to build this functionality requires you to drill into the product object's options and specifically target the color variant options.
-
-The association between the image and the color's name is found in the product image's alt-text value, so you must make the selected variant's image appear on the selection of that variant color swatch.
-
-Here are some samples of how a color swatch should look like:
+The components within the `components/product/` directory are designed to be reusable and flexible, allowing for easy integration and customization within different parts of the application.
